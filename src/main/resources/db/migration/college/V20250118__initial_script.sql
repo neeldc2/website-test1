@@ -1,7 +1,7 @@
 -- TODO: ALTER TABLE command below is not idempotent
 
 -- SELECT query
-SELECT BIN_TO_UUID(id) AS id, first_name FROM students WHERE id = UUID_TO_BIN('0fab1a6b-da72-47eb-a90c-38c936ab2e24');
+-- SELECT BIN_TO_UUID(id) AS id, first_name FROM students WHERE id = UUID_TO_BIN('0fab1a6b-da72-47eb-a90c-38c936ab2e24');
 
 -- Create the 'students' table for storing basic student information
 CREATE TABLE IF NOT EXISTS students (
