@@ -24,7 +24,9 @@ public class StudentController {
 
     @PostMapping("/students")
     public List<Student> addStudent(@RequestBody StudentDto studentDto) {
-        Student student = Student.builder().firstName(studentDto.name()).build();
+        Student student = Student.builder()
+                .firstName(studentDto.name())
+                .build();
         studentRepository.save(student);
         return studentRepository.findAll();
     }
