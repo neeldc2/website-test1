@@ -60,6 +60,6 @@ CREATE TABLE IF NOT EXISTS departments (
 );
 
 -- Add a foreign key column to the 'courses' table for department association
-ALTER TABLE courses
-ADD COLUMN department_id binary(16),
-ADD FOREIGN KEY (department_id) REFERENCES departments(id) ON DELETE SET NULL;
+-- ALTER TABLE courses
+-- ADD COLUMN department_id binary(16),
+-- ADD FOREIGN KEY (department_id) REFERENCES departments(id) ON DELETE SET NULL;
