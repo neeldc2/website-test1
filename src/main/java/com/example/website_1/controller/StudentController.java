@@ -25,7 +25,7 @@ public class StudentController {
 
     @GetMapping("/students")
     public List<Student> getStudents(HttpServletRequest request) {
-        Assert.isTrue(StringUtils.hasText(request.getHeader("Authorization")),
+        Assert.isTrue(!StringUtils.hasText(request.getHeader("Authorization")),
                 "Authorization still exists");
         Assert.hasText(request.getHeader("x-user-id"),
                 "Header does not have User Id");
