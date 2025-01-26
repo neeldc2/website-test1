@@ -3,6 +3,7 @@ package com.example.website_1.controller;
 import com.example.website_1.dto.StudentDto;
 import com.example.website_1.entity.Student;
 import com.example.website_1.repository.StudentRepository;
+import com.example.website_1.service.StudentService;
 import com.example.website_1.usercontext.UserContextHolder;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ import java.util.UUID;
 public class StudentController {
 
     private final StudentRepository studentRepository;
+    private final StudentService studentService;
 
     @GetMapping("/students")
     public List<Student> getStudents(HttpServletRequest request) {
@@ -31,7 +33,7 @@ public class StudentController {
                 "Header does not have User Id");
         Assert.hasText(UserContextHolder.getUserContext().userId().toString(),
                 "User Id does not exist in UserContext");
-        return studentRepository.findAll();
+        return studentService.getAllStudents();
     }
 
     @GetMapping("/students/{studentId}")
