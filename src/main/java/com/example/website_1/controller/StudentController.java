@@ -36,6 +36,11 @@ public class StudentController {
         return studentService.getAllStudents();
     }
 
+    @GetMapping("/students-2")
+    public List<Student> getStudents2(HttpServletRequest request) {
+        return studentService.getAllStudents();
+    }
+
     @GetMapping("/students/{studentId}")
     public Student getStudent(@PathVariable(name = "studentId") UUID studentId) {
         return studentRepository.findById(studentId).get();

@@ -3,6 +3,7 @@ package com.example.website_1.usercontext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import java.util.UUID;
@@ -18,10 +19,13 @@ public class UserContextInterceptor implements HandlerInterceptor {
             throws Exception {
         String userId = request.getHeader("x-user-id");
 
-        UserContext userContext = UserContext.builder()
-                .userId(UUID.fromString(userId))
-                .build();
-        UserContextHolder.setUserContext(userContext);
+        // remove if the code needs to fail if userId does not exists
+        if (StringUtils.hasText(userId)) {
+            UserContext userContext = UserContext.builder()
+                    .userId(UUID.fromString(userId))
+                    .build();
+            UserContextHolder.setUserContext(userContext);
+        }
 
         // It tells Spring to further process the request (true) or not (false).
         return true;
