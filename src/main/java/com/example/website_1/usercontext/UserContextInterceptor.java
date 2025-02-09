@@ -6,7 +6,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component
 public class UserContextInterceptor implements HandlerInterceptor {
@@ -18,7 +21,10 @@ public class UserContextInterceptor implements HandlerInterceptor {
             final Object handler)
             throws Exception {
         String userId = request.getHeader("x-user-id");
+        String tenantName = request.getHeader("x-tenant");
         String tenantId = request.getHeader("x-tenant-id");
+        String tenantGuid = request.getHeader("x-tenant-guid");
+        String permissionSetString = request.getHeader("x-permissions");
 
         UserContext userContext;
         UserContext.UserContextBuilder builder = UserContext.builder();
@@ -28,9 +34,14 @@ public class UserContextInterceptor implements HandlerInterceptor {
             builder.userId(UUID.fromString(userId));
         }
 
-        if (StringUtils.hasText(tenantId)) {
-            builder.tenantId(tenantId);
-        }
+        builder.tenant(tenantName);
+        builder.tenantId(Long.parseLong(tenantId));
+        builder.tenantGuid(UUID.fromString(tenantGuid));
+
+        Set<String> permissions = Stream.of(
+                        permissionSetString.substring(1, permissionSetString.length() - 1).split(",\\s*"))
+                .collect(Collectors.toSet());
+        builder.permissions(permissions);
 
         userContext = builder.build();
         UserContextHolder.setUserContext(userContext);

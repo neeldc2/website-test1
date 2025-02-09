@@ -12,11 +12,11 @@ public class CurrentTenantIdentifierResolverImpl2 implements CurrentTenantIdenti
         if (UserContextHolder.getUserContext() == null) {
             return "INIT";
         }
-        String tenantId = UserContextHolder.getUserContext().tenantId();
-        if (tenantId == null) {
+        String tenant = UserContextHolder.getUserContext().tenant();
+        if (tenant == null) {
             return "INIT";
         }
-        return tenantId;
+        return tenant;
     }
 
     @Override

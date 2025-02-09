@@ -1,5 +1,6 @@
 package com.example.website_1.controller;
 
+import com.example.website_1.annotation.ValidatePermission;
 import com.example.website_1.dto.StudentDto;
 import com.example.website_1.entity.Student;
 import com.example.website_1.repository.StudentRepository;
@@ -20,6 +21,7 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
+@ValidatePermission({"MANAGE_USERS"})
 public class StudentController {
 
     private final StudentRepository studentRepository;
@@ -46,6 +48,7 @@ public class StudentController {
         return studentRepository.findById(studentId).get();
     }
 
+    @ValidatePermission({"EDIT_PROFILE"})
     @PostMapping("/students")
     public List<Student> addStudent(@RequestBody StudentDto studentDto) {
         Student student = Student.builder()

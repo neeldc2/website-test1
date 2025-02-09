@@ -13,13 +13,11 @@ There are many configs in this service that helps in connecting to the right dat
 These configs are explained below
 
 1. DataSourceConfig and DataSourceRouting class.
-
 * Using the above classes, to add a tenant, a restart will be required.
 * To enable this, uncomment the code in DataSourceConfig class and in DataSourceRouting.
 * In DataSourceConfig class, the routing was not done for tenantId, it was done for userId.
 
 2. TenantAwareRoutingDataSource and TenantTransactionManagerConfig class.
-
 * Using above classes, a restart won't be needed if a new tenant is added, unlike DataSourceRouting/DataSourceConfig
   class implementation.
 * Con with this approach is that it needs a default database to connect to, which is not a tenant database.
@@ -33,6 +31,5 @@ These configs are explained below
 
 4. The implementation which I have liked as of now is using DynamicMultiTenantConnectionProvider and
    DynamicMultiTenantConnectionProviderConfig classes.
-
 * It also uses TenantDataSourceRegistry class to store DataSources.
 * It uses CurrentTenantIdentifierResolverImpl2 class to identify the tenant info
