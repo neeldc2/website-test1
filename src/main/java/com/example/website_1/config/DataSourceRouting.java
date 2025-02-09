@@ -1,12 +1,12 @@
 package com.example.website_1.config;
 
 import com.example.website_1.usercontext.UserContextHolder;
-import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.springframework.util.StringUtils;
 
-public class DataSourceRouting extends AbstractRoutingDataSource {
+//public class DataSourceRouting extends AbstractRoutingDataSource {
+public class DataSourceRouting {
 
-    @Override
+    //@Override
     protected Object determineCurrentLookupKey() {
         // To test this, do not send userId in the header
         if (UserContextHolder.getUserContext() == null

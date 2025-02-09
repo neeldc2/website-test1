@@ -7,6 +7,7 @@ import java.util.UUID;
 
 @Builder
 public record UserContext(
-        @NonNull UUID userId
+        @NonNull UUID userId,
+        @NonNull String tenantId
 ) {
 }

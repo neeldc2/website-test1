@@ -1,20 +1,16 @@
 package com.example.website_1.config;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
-
-import javax.sql.DataSource;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * This way, to add a tenant, a restart will be required.
+ * To enable this, uncomment the code in this class and in DataSourceRouting.
+ * In this class, the routing was not done for tenantId, it was done for userId
  */
 @Configuration
 public class DataSourceConfig {
 
-    @Bean
+    /*@Bean
     public DataSource dataSource() {
         DataSourceRouting dataSourceRouting = new DataSourceRouting();
 
@@ -36,5 +32,5 @@ public class DataSourceConfig {
         dataSource.setUsername(username);
         dataSource.setPassword(password);
         return dataSource;
-    }
+    }*/
 }

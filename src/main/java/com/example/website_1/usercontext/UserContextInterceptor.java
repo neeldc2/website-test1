@@ -18,14 +18,22 @@ public class UserContextInterceptor implements HandlerInterceptor {
             final Object handler)
             throws Exception {
         String userId = request.getHeader("x-user-id");
+        String tenantId = request.getHeader("x-tenant-id");
 
-        // remove if the code needs to fail if userId does not exists
+        UserContext userContext;
+        UserContext.UserContextBuilder builder = UserContext.builder();
+
+        // remove if the code needs to fail if userId does not exist
         if (StringUtils.hasText(userId)) {
-            UserContext userContext = UserContext.builder()
-                    .userId(UUID.fromString(userId))
-                    .build();
-            UserContextHolder.setUserContext(userContext);
+            builder.userId(UUID.fromString(userId));
         }
+
+        if (StringUtils.hasText(tenantId)) {
+            builder.tenantId(tenantId);
+        }
+
+        userContext = builder.build();
+        UserContextHolder.setUserContext(userContext);
 
         // It tells Spring to further process the request (true) or not (false).
         return true;

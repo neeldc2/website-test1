@@ -12,7 +12,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-@Transactional
+@Transactional(transactionManager = "tenantBasedTransactionManager")
+//@Transactional
 public class StudentService {
 
     private final StudentRepository studentRepository;
